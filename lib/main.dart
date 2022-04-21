@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bloc_observable.dart';
+import 'constants/theme.dart';
 import 'feature/app/bloc/main_app_bloc.dart';
 import 'feature/app/ui/main_screen.dart';
 import 'feature/auth/bloc/auth_bloc.dart';
@@ -59,9 +60,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Nike Sneaker Shop',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: theme(),
       home: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {},
         builder: (context, state) {

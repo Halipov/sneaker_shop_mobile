@@ -5,9 +5,11 @@ class Product {
   final String article;
   final String name;
   final String description;
+  final List<String> photos;
   final int price;
   final int size;
   Product({
+    required this.photos,
     required this.id,
     required this.article,
     required this.name,
@@ -19,6 +21,7 @@ class Product {
   Product copyWith({
     int? id,
     String? article,
+    List<String>? photos,
     String? name,
     String? description,
     int? price,
@@ -26,6 +29,7 @@ class Product {
   }) {
     return Product(
       id: id ?? this.id,
+      photos: photos ?? this.photos,
       article: article ?? this.article,
       name: name ?? this.name,
       description: description ?? this.description,
@@ -49,6 +53,7 @@ class Product {
     return Product(
       id: map['id']?.toInt() ?? 0,
       article: map['article'] ?? '',
+      photos: List.from(map['photos']),
       name: map['name'] ?? '',
       description: map['description'] ?? '',
       price: map['price']?.toInt() ?? 0,
