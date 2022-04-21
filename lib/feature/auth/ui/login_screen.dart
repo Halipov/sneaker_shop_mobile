@@ -36,6 +36,10 @@ class LoginScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      TextButton(
+                        child: Text(''),
+                        onPressed: () => save(context),
+                      ),
                       const SizedBox(
                         height: 80.0,
                       ),
@@ -128,3 +132,5 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+
+void save(BuildContext context) {}
