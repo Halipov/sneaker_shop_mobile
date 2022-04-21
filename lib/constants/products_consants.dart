@@ -1,7 +1,15 @@
 import 'package:sneaker_shop/feature/catalog/model/product.dart';
 
+import '../common/model/order_model.dart';
+
 // ignore: avoid_classes_with_only_static_members
 class HardCodeConstants {
+  static HardCodeConstants? _instance;
+
+  HardCodeConstants._();
+
+  factory HardCodeConstants() => _instance ??= HardCodeConstants._();
+  bool admin = false;
   List<Product> list = [
     Product(
       id: 1,
@@ -30,12 +38,59 @@ class HardCodeConstants {
       size: 41,
       photos: ['assets/nike-flywire-nike-white.png'],
     ),
+    Product(
+      id: 4,
+      article: '12346',
+      name: 'Nike Air Zoom',
+      description: 'Очень удобные кроссовки',
+      price: 60,
+      size: 41,
+      photos: ['assets/nike-air-zoom.png'],
+    ),
+    Product(
+      id: 5,
+      article: '12347',
+      name: 'Nike Flywire White',
+      description: 'Очень удобные кроссовки',
+      price: 60,
+      size: 41,
+      photos: ['assets/nike-flywire-nike-white.png'],
+    ),
   ];
+
+  List<OrderModel> orders = [];
+
+  List<Product> favorite = [];
+
+  List<Product> cart = [];
+  bool get isAdmin => admin;
+
+  set isAdmin(bool value) => admin = value;
 
   List<Product> get productList => list;
 
   List<Product> addProduct(Product product) {
     list.add(product);
+    return list;
+  }
+
+  List<Product> addProductToCart(Product product) {
+    cart.add(product);
+    return cart;
+  }
+
+  List<Product> deleteProductFromCart(Product product) {
+    cart.removeWhere((element) => element.id == product.id);
+    return list;
+  }
+
+  List<Product> addProductToFavoritre(Product product) {
+    favorite.add(product);
+    return cart;
+  }
+
+  List<Product> deleteProductFromFavorite(Product product) {
+    favorite.removeWhere((element) => element.id == product.id);
     return list;
   }
 

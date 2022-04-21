@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../constants/constants.dart';
 import '../../../enums/app_mode.dart';
+import '../../catalog/ui/cart_screen.dart';
 import '../../catalog/ui/catalog_screen.dart';
+import '../../catalog/ui/favorite_screen.dart';
+import '../../catalog/ui/profile/profile_screen.dart';
 import '../bloc/main_app_bloc.dart';
 
 class MainScreen extends StatelessWidget {
@@ -10,6 +15,7 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const inActiveIconColor = Color(0xFFB6B6B6);
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.white,
@@ -19,11 +25,11 @@ class MainScreen extends StatelessWidget {
             case AppMode.catalog:
               return const CatalogScreen();
             case AppMode.favorite:
-              return Container();
+              return const FavoriteScreen();
             case AppMode.cart:
-              return Container();
+              return const CartScreen();
             case AppMode.profile:
-              return Container();
+              return ProfileScreen();
             default:
               return const CatalogScreen();
           }
@@ -39,42 +45,52 @@ class MainScreen extends StatelessWidget {
                 AppMode.values[index],
               ),
             ),
+            selectedItemColor: kPrimaryColor,
+            unselectedItemColor: inActiveIconColor,
             items: [
-              const BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.shopping_bag_outlined,
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  'assets/icons/Shop Icon.svg',
+                  color: inActiveIconColor,
                 ),
-                activeIcon: Icon(
-                  Icons.shopping_bag_outlined,
-                  color: Colors.blueAccent,
+                activeIcon: SvgPicture.asset(
+                  'assets/icons/Shop Icon.svg',
+                  color: kPrimaryColor,
                 ),
                 label: 'Catalog',
               ),
-              const BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.favorite,
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  'assets/icons/Heart Icon.svg',
+                  color: inActiveIconColor,
                 ),
-                activeIcon: Icon(
-                  Icons.favorite,
-                  color: Colors.blueAccent,
+                activeIcon: SvgPicture.asset(
+                  'assets/icons/Heart Icon.svg',
+                  color: kPrimaryColor,
                 ),
                 label: 'Favorite',
               ),
-              const BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_cart),
-                activeIcon: Icon(
-                  Icons.shopping_cart,
-                  color: Colors.blueAccent,
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  'assets/icons/Cart Icon.svg',
+                  color: inActiveIconColor,
+                ),
+                activeIcon: SvgPicture.asset(
+                  'assets/icons/Cart Icon.svg',
+                  color: kPrimaryColor,
                 ),
                 label: 'Cart',
               ),
-              const BottomNavigationBarItem(
-                icon: Icon(Icons.account_box),
-                activeIcon: Icon(
-                  Icons.account_box,
-                  color: Colors.blueAccent,
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  'assets/icons/User Icon.svg',
+                  color: inActiveIconColor,
                 ),
-                label: 'Account',
+                activeIcon: SvgPicture.asset(
+                  'assets/icons/User Icon.svg',
+                  color: kPrimaryColor,
+                ),
+                label: 'Profile',
               ),
             ],
           );

@@ -12,3 +12,9 @@ class MainAppPageTapped extends MainAppEvent {
 
   MainAppPageTapped(this.appMode);
 }
+
+class AdminAppPageTapped extends MainAppEvent {
+  final AppMode appMode;
+
+  AdminAppPageTapped(this.appMode);
+}

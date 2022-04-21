@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../../constants/products_consants.dart';
 import '../model/product.dart';
 import '../service/product_service.dart';
 
@@ -20,6 +21,22 @@ class CatalogBloc extends Bloc<CatalogEvent, CatalogState> {
           CatalogErrorState(message: e.toString()),
         );
       }
+    });
+    on<SearchEvent>((event, emit) async {
+      emit(
+        CatalogLoadingState(),
+      );
+      final searchedList = HardCodeConstants()
+          .list
+          .where(
+            (element) => element.name.contains(event.text),
+          )
+          .toList();
+      emit(
+        CatalogLoadedState(
+          products: searchedList,
+        ),
+      );
     });
   }
 }

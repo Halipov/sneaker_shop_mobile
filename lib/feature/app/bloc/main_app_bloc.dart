@@ -15,5 +15,12 @@ class MainAppBloc extends Bloc<MainAppEvent, MainAppState> {
         );
       },
     );
+    on<AdminAppPageTapped>(
+      (event, emit) {
+        emit(
+          MainAppState(adminAppMode: event.appMode),
+        );
+      },
+    );
   }
 }

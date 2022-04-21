@@ -29,6 +29,17 @@ class UserProfile {
       ],
     );
   }
+  factory UserProfile.admin() {
+    return UserProfile(
+      id: 0,
+      username: 'Admin',
+      userInfo: UserInfo.guest(),
+      accessToken: 'admin',
+      roles: [
+        'admin',
+      ],
+    );
+  }
   UserProfile copyWith({
     int? id,
     String? username,

@@ -10,25 +10,23 @@ class SearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-          color: kSecondaryColor.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: TextField(
-          onChanged: print,
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: getProportionateScreenWidth(20),
-              vertical: getProportionateScreenWidth(9),
-            ),
-            border: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            enabledBorder: InputBorder.none,
-            hintText: 'Search product',
-            prefixIcon: const Icon(Icons.search),
+    return Container(
+      decoration: BoxDecoration(
+        color: kSecondaryColor.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: TextField(
+        onChanged: print,
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: getProportionateScreenWidth(20),
+            vertical: getProportionateScreenWidth(9),
           ),
+          border: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          enabledBorder: InputBorder.none,
+          hintText: 'Search product',
+          prefixIcon: const Icon(Icons.search),
         ),
       ),
     );

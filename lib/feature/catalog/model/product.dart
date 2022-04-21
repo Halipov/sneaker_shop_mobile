@@ -1,11 +1,21 @@
 import 'dart:convert';
 
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
+
 class Product {
   final int id;
   final String article;
   final String name;
   final String description;
   final List<String> photos;
+  final List<Color> colors = [
+    const Color(0xFFF6625E),
+    const Color(0xFF836DB8),
+    const Color(0xFFDECB9C),
+    Colors.white,
+  ];
   final int price;
   final int size;
   Product({

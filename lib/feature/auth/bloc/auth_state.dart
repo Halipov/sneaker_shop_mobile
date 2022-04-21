@@ -15,6 +15,8 @@ class AuthNotAuthenticated extends AuthState {}
 
 class AuthAuthenticated extends AuthState {}
 
+class AuthAdminAuthenticated extends AuthState {}
+
 class AuthFailureState extends AuthState {
   final String errorMessage;
   final String? appVersion;
