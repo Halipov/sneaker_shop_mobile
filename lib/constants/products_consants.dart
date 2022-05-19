@@ -1,6 +1,5 @@
-import 'package:sneaker_shop/feature/catalog/model/product.dart';
-
 import '../common/model/order_model.dart';
+import '../feature/catalog/model/product.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class HardCodeConstants {
@@ -18,7 +17,7 @@ class HardCodeConstants {
       description: 'Очень удобные кроссовки',
       price: 60,
       size: 41,
-      photos: ['assets/nike-air-force.png'],
+      photos: [],
     ),
     Product(
       id: 2,
@@ -27,7 +26,7 @@ class HardCodeConstants {
       description: 'Очень удобные кроссовки',
       price: 60,
       size: 41,
-      photos: ['assets/nike-air-zoom.png'],
+      photos: [],
     ),
     Product(
       id: 3,
@@ -36,7 +35,7 @@ class HardCodeConstants {
       description: 'Очень удобные кроссовки',
       price: 60,
       size: 41,
-      photos: ['assets/nike-flywire-nike-white.png'],
+      photos: [],
     ),
     Product(
       id: 4,
@@ -45,7 +44,7 @@ class HardCodeConstants {
       description: 'Очень удобные кроссовки',
       price: 60,
       size: 41,
-      photos: ['assets/nike-air-zoom.png'],
+      photos: [],
     ),
     Product(
       id: 5,
@@ -54,7 +53,7 @@ class HardCodeConstants {
       description: 'Очень удобные кроссовки',
       price: 60,
       size: 41,
-      photos: ['assets/nike-flywire-nike-white.png'],
+      photos: [],
     ),
   ];
 

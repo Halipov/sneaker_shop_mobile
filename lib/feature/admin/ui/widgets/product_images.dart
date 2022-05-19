@@ -27,7 +27,12 @@ class _ProductImagesState extends State<ProductImages> {
             aspectRatio: 1,
             child: Hero(
               tag: widget.product.id.toString(),
-              child: Image.asset(widget.product.photos[selectedImage]),
+              child: Container(
+                child: Image.memory(
+                  widget.product.photos[selectedImage],
+                  filterQuality: FilterQuality.high,
+                ),
+              ),
             ),
           ),
         ),
@@ -62,7 +67,7 @@ class _ProductImagesState extends State<ProductImages> {
           border: Border.all(
               color: kPrimaryColor.withOpacity(selectedImage == index ? 1 : 0)),
         ),
-        child: Image.asset(widget.product.photos[index]),
+        child: Image.memory(widget.product.photos[index]),
       ),
     );
   }

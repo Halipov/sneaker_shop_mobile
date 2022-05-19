@@ -6,7 +6,7 @@ import '../../../constants/size_config.dart';
 import '../../cart/ui/widgets/cart_card.dart';
 import '../../catalog/ui/widgets/home_header.dart';
 import '../bloc/admin_bloc.dart';
-import 'product_details.dart';
+import '../../product/ui/product_details.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({Key? key}) : super(key: key);
@@ -69,11 +69,13 @@ class _ProductsScreenState extends State<ProductsScreen> {
                       itemBuilder: (context, index) {
                         final item = state.products[index];
                         return InkWell(
-                          onTap: () => Navigator.pushNamed(
-                            context,
-                            ProductDetails.routeName,
-                            arguments: ProductDetailsArguments(product: item),
-                          ).whenComplete(() => setState(() {})),
+                          onTap: () => showDialog(
+                            useSafeArea: false,
+                            context: context,
+                            builder: (_) => ProductDetails(product: item),
+                          ).whenComplete(
+                            () => setState(() {}),
+                          ),
                           child: Dismissible(
                             key: Key(item.name),
                             onDismissed: (direction) {

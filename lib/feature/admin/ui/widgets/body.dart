@@ -4,15 +4,21 @@ import '../../../../common/default_button.dart';
 import '../../../../constants/products_consants.dart';
 import '../../../../constants/size_config.dart';
 import '../../../catalog/model/product.dart';
+import '../../../product/bloc/product_bloc.dart';
 import 'color_dots.dart';
 import 'product_description.dart';
-import 'top_rounded_container.dart';
 import 'product_images.dart';
+import 'top_rounded_container.dart';
 
 class Body extends StatelessWidget {
   final Product product;
+  final ProductBloc bloc;
 
-  const Body({Key? key, required this.product}) : super(key: key);
+  const Body({
+    Key? key,
+    required this.product,
+    required this.bloc,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,17 +50,7 @@ class Body extends StatelessWidget {
                         child: DefaultButton(
                           text: 'Add To Cart',
                           press: () {
-                            HardCodeConstants().cart.add(product);
-
-                            showModalBottomSheet(
-                              context: context,
-                              builder: (context) {
-                                return const Text(
-                                  'Added to Cart',
-                                  textAlign: TextAlign.center,
-                                );
-                              },
-                            );
+                            bloc.add(AddToCartEvent(productId: product.id));
                           },
                         ),
                       ),

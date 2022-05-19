@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../constants/constants.dart';
 import '../../../../constants/products_consants.dart';
 import '../../../../constants/size_config.dart';
 import '../../../catalog/model/product.dart';
+import '../../../favorite/bloc/favorite_bloc.dart';
+import '../../../product/bloc/product_bloc.dart';
 
 class ProductDescription extends StatefulWidget {
   const ProductDescription({
@@ -39,6 +42,8 @@ class _ProductDescriptionState extends State<ProductDescription> {
             : InkWell(
                 onTap: () {
                   setState(() {
+                    BlocProvider.of<ProductBloc>(context)
+                        .add(AddToFavoriteEvent(productId: widget.product.id));
                     HardCodeConstants().favorite.contains(widget.product)
                         ? HardCodeConstants().favorite.remove(widget.product)
                         : HardCodeConstants().favorite.add(widget.product);

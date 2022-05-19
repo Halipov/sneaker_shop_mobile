@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'dart:ui';
 
@@ -9,7 +10,7 @@ class Product {
   final String article;
   final String name;
   final String description;
-  final List<String> photos;
+  final List<Uint8List> photos;
   final List<Color> colors = [
     const Color(0xFFF6625E),
     const Color(0xFF836DB8),
@@ -31,7 +32,7 @@ class Product {
   Product copyWith({
     int? id,
     String? article,
-    List<String>? photos,
+    List<Uint8List>? photos,
     String? name,
     String? description,
     int? price,
@@ -63,7 +64,13 @@ class Product {
     return Product(
       id: map['id']?.toInt() ?? 0,
       article: map['article'] ?? '',
-      photos: List.from(map['photos']),
+      photos: map['photos'] != null
+          ? List.from(
+              map['photos'],
+            )
+              .map((e) => Uint8List.fromList(base64Decode(e.toString())))
+              .toList()
+          : [],
       name: map['name'] ?? '',
       description: map['description'] ?? '',
       price: map['price']?.toInt() ?? 0,

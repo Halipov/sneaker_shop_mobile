@@ -12,50 +12,66 @@ import 'feature/auth/bloc/auth_bloc.dart';
 import 'feature/auth/service/auth_service.dart';
 import 'feature/auth/service/user_service.dart';
 import 'feature/auth/ui/login_screen.dart';
+import 'feature/cart/bloc/cart_bloc.dart';
 import 'feature/catalog/bloc/catalog_bloc.dart';
 import 'feature/catalog/service/product_service.dart';
+import 'feature/favorite/bloc/favorite_bloc.dart';
 import 'routes.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   final dio = Dio();
-  Bloc.observer = AppBlocObserver();
-  runApp(
-    MultiRepositoryProvider(
-      providers: [
-        RepositoryProvider(
-          create: (context) => AuthService(dio: dio),
-        ),
-        RepositoryProvider(
-          create: (context) => UserService(),
-        ),
-        RepositoryProvider(
-          create: (context) => ProductService(dio),
-        ),
-      ],
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider<AuthBloc>(
-            create: (context) => AuthBloc(
-              context.read<AuthService>(),
-              context.read<UserService>(),
+  BlocOverrides.runZoned(
+    () {
+      runApp(
+        MultiRepositoryProvider(
+          providers: [
+            RepositoryProvider(
+              create: (context) => AuthService(dio: dio),
             ),
-          ),
-          BlocProvider<MainAppBloc>(
-            create: (context) => MainAppBloc(),
-          ),
-          BlocProvider<AdminBloc>(
-            create: (context) => AdminBloc(),
-          ),
-          BlocProvider<CatalogBloc>(
-            create: (context) => CatalogBloc(
-              context.read<ProductService>(),
+            RepositoryProvider(
+              create: (context) => UserService(),
             ),
-          )
-        ],
-        child: const MyApp(),
-      ),
-    ),
+            RepositoryProvider(
+              create: (context) => ProductService(dio),
+            ),
+          ],
+          child: MultiBlocProvider(
+            providers: [
+              BlocProvider<AuthBloc>(
+                create: (context) => AuthBloc(
+                  context.read<AuthService>(),
+                  context.read<UserService>(),
+                ),
+              ),
+              BlocProvider<MainAppBloc>(
+                create: (context) => MainAppBloc(),
+              ),
+              BlocProvider<AdminBloc>(
+                create: (context) => AdminBloc(),
+              ),
+              BlocProvider<CatalogBloc>(
+                create: (context) => CatalogBloc(
+                  context.read<ProductService>(),
+                ),
+              ),
+              BlocProvider<CartBloc>(
+                create: (context) => CartBloc(
+                  context.read<ProductService>(),
+                ),
+              ),
+              BlocProvider<FavoriteBloc>(
+                create: (context) => FavoriteBloc(
+                  context.read<ProductService>(),
+                ),
+              )
+            ],
+            child: const MyApp(),
+          ),
+        ),
+      );
+    },
+    blocObserver: AppBlocObserver(),
   );
 }
 

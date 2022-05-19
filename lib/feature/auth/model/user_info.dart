@@ -10,16 +10,12 @@ class UserInfo {
   final String lastName;
   final String phone;
   final String address;
-  final List<Product> product;
-  final Cart cart;
   UserInfo({
     required this.id,
     required this.firstName,
     required this.lastName,
     required this.phone,
     required this.address,
-    required this.product,
-    required this.cart,
   });
   factory UserInfo.guest() {
     return UserInfo(
@@ -28,8 +24,6 @@ class UserInfo {
       lastName: '',
       phone: '',
       address: '',
-      cart: Cart.guest(),
-      product: [],
     );
   }
 
@@ -48,8 +42,6 @@ class UserInfo {
       lastName: lastName ?? this.lastName,
       phone: phone ?? this.phone,
       address: address ?? this.address,
-      product: product ?? this.product,
-      cart: cart ?? this.cart,
     );
   }
 
@@ -60,8 +52,6 @@ class UserInfo {
       'lastName': lastName,
       'phone': phone,
       'address': address,
-      'product': product.map((x) => x.toMap()).toList(),
-      'cart': cart.toMap(),
     };
   }
 
@@ -72,12 +62,6 @@ class UserInfo {
       lastName: map['lastName'] ?? '',
       phone: map['phone'] ?? '',
       address: map['address'] ?? '',
-      product: List<Product>.from(
-        map['product'].map(
-          (x) => Product.fromMap(x),
-        ),
-      ),
-      cart: Cart.fromMap(map['cart']),
     );
   }
 
@@ -88,7 +72,7 @@ class UserInfo {
 
   @override
   String toString() {
-    return 'UserInfo(id: $id, firstName: $firstName, lastName: $lastName, phone: $phone, address: $address, product: $product, cart: $cart)';
+    return 'UserInfo(id: $id, firstName: $firstName, lastName: $lastName, phone: $phone, address: $address)';
   }
 
   @override
@@ -100,9 +84,7 @@ class UserInfo {
         other.firstName == firstName &&
         other.lastName == lastName &&
         other.phone == phone &&
-        other.address == address &&
-        listEquals(other.product, product) &&
-        other.cart == cart;
+        other.address == address;
   }
 
   @override
@@ -111,9 +93,7 @@ class UserInfo {
         firstName.hashCode ^
         lastName.hashCode ^
         phone.hashCode ^
-        address.hashCode ^
-        product.hashCode ^
-        cart.hashCode;
+        address.hashCode;
   }
 }
 

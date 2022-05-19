@@ -23,15 +23,14 @@ class CatalogBloc extends Bloc<CatalogEvent, CatalogState> {
       }
     });
     on<SearchEvent>((event, emit) async {
-      emit(
-        CatalogLoadingState(),
-      );
-      final searchedList = HardCodeConstants()
-          .list
+      emit(CatalogLoadingState());
+      final productList = await _productService.fetchProducts();
+      final searchedList = productList
           .where(
             (element) => element.name.contains(event.text),
           )
           .toList();
+
       emit(
         CatalogLoadedState(
           products: searchedList,

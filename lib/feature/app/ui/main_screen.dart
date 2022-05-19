@@ -4,9 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants/constants.dart';
 import '../../../enums/app_mode.dart';
-import '../../catalog/ui/cart_screen.dart';
+import '../../cart/ui/cart_screen.dart';
 import '../../catalog/ui/catalog_screen.dart';
-import '../../catalog/ui/favorite_screen.dart';
+import '../../favorite/ui/favorite_screen.dart';
 import '../../catalog/ui/profile/profile_screen.dart';
 import '../bloc/main_app_bloc.dart';
 

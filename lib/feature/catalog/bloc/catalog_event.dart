@@ -10,7 +10,10 @@ abstract class CatalogEvent extends Equatable {
 class FetchCatalog extends CatalogEvent {}
 
 class SearchEvent extends CatalogEvent {
+  // final List<Product> products;
   final String text;
 
-  SearchEvent(this.text);
+  SearchEvent(
+    this.text,
+  );
 }
