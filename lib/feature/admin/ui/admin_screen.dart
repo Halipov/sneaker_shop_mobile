@@ -17,8 +17,8 @@ class AdminScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const inActiveIconColor = Color(0xFFB6B6B6);
     return Scaffold(
-      extendBodyBehindAppBar: true,
       backgroundColor: Colors.white,
+      extendBody: false,
       body: BlocBuilder<MainAppBloc, MainAppState>(
         builder: (context, state) {
           switch (state.adminAppMode) {

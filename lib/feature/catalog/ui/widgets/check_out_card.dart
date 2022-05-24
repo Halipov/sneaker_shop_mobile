@@ -6,12 +6,16 @@ import '../../../../common/model/order_model.dart';
 import '../../../../constants/products_consants.dart';
 import '../../../../constants/size_config.dart';
 import '../../../auth/service/user_service.dart';
+import '../../../order/ui/order_screen.dart';
+import '../../model/product.dart';
 
 class CheckoutCard extends StatelessWidget {
+  final List<Product> productList;
   final double totalAmount;
   const CheckoutCard({
     Key? key,
     required this.totalAmount,
+    required this.productList,
   }) : super(key: key);
 
   @override
@@ -61,21 +65,13 @@ class CheckoutCard extends StatelessWidget {
                   child: DefaultButton(
                     text: 'Check Out',
                     press: () {
-                      HardCodeConstants().orders.add(
-                            OrderModel(
-                              totalAmount: totalAmount,
-                              user: context.read<UserService>().user,
-                            ),
-                          );
-                      // HardCodeConstants().cart.clear();
-                      showModalBottomSheet(
+                      showDialog(
+                        useSafeArea: false,
                         context: context,
-                        builder: (context) {
-                          return const Text(
-                            'Added to orders',
-                            textAlign: TextAlign.center,
-                          );
-                        },
+                        builder: (_) => OrderScreen(
+                          productList: productList,
+                          totalAmount: totalAmount,
+                        ),
                       );
                     },
                   ),

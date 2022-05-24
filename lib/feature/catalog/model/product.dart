@@ -60,6 +60,12 @@ class Product {
     };
   }
 
+  Map<String, dynamic> toOrderMap() {
+    return {
+      'id': id,
+    };
+  }
+
   factory Product.fromMap(Map<String, dynamic> map) {
     return Product(
       id: map['id']?.toInt() ?? 0,

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 
 import 'bloc_observable.dart';
 import 'constants/theme.dart';
@@ -21,6 +22,8 @@ import 'routes.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   final dio = Dio();
+  Stripe.publishableKey =
+      'pk_test_51JfQ1ZH7g400lLF3CxUqGG1AOQFRx02BIk899JfYQj37KvCDDzvjXeCl48OBRuejPvjEValEzO6LNqsjwwIp9izq003hwQbDqW';
   BlocOverrides.runZoned(
     () {
       runApp(

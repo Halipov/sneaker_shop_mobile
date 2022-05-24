@@ -24,6 +24,7 @@ class CartScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: CheckoutCard(
+                    productList: state.products,
                     totalAmount: state.sum,
                   ),
                 ),

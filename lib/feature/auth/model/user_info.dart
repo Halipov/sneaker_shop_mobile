@@ -47,11 +47,16 @@ class UserInfo {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
       'firstName': firstName,
       'lastName': lastName,
       'phone': phone,
       'address': address,
+    };
+  }
+
+  Map<String, dynamic> toOrderMap() {
+    return {
+      'id': id,
     };
   }
 

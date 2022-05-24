@@ -15,6 +15,7 @@ dependencies:
   file_picker: ^4.3.3
   dio: ^4.0.0
   flutter_svg: ^1.0.3
+  flutter_stripe: ^3.0.0
   flutter:
     sdk: flutter
 
@@ -29,6 +30,7 @@ flutter:
     - assets/
     - assets/images/
     - assets/icons/
+    - assets/main/
 
   fonts:
     - family: Muli

@@ -12,13 +12,21 @@ abstract class AuthEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoginInEvent extends AuthEvent {
+class LogInEvent extends AuthEvent {
   final User user;
   final bool? rememberMe;
 
-  const LoginInEvent({
+  const LogInEvent({
     required this.user,
     this.rememberMe,
+  });
+}
+
+class SignUpEvent extends AuthEvent {
+  final NewUser user;
+
+  SignUpEvent({
+    required this.user,
   });
 }
 
