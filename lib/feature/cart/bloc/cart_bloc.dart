@@ -14,7 +14,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       try {
         emit(CartLoadingState());
         final productList = await _productService.fetchCart();
-        var sum = 0.0;
+        var sum = 0;
         productList.map((e) {
           sum += e.price;
         }).toList();
@@ -39,7 +39,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       emit(
         CartLoadedState(
           products: productList,
-          sum: sum,
+          sum: sum.round(),
         ),
       );
     });

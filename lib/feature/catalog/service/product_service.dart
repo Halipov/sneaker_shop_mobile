@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 
 import '../../../constants/url_config.dart';
@@ -32,6 +34,68 @@ class ProductService {
           (x) => Product.fromMap(x),
         ),
       );
+    } on DioError {
+      rethrow;
+    }
+  }
+
+  Future<void> deleteProduct(int id) async {
+    final endpoint = UrlConfig.endpoint;
+    final url = '$endpoint/api/product/$id';
+    try {
+      final response = await dio.delete(
+        url,
+        options: Options(
+          headers: <String, String>{
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+      print(response.data);
+    } on DioError {
+      rethrow;
+    }
+  }
+
+  Future<int> addProduct(Product product) async {
+    final endpoint = UrlConfig.endpoint;
+    final url = '$endpoint/api/product';
+    try {
+      final response = await dio.post(
+        url,
+        data: product.toJson(),
+        options: Options(
+          headers: <String, String>{
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+      print(response.data['id']);
+      return response.data['id'];
+    } on DioError {
+      rethrow;
+    }
+  }
+
+  Future<void> addPhoto(File photo, int id) async {
+    final fileName = photo.path.split('/').last;
+    final endpoint = UrlConfig.endpoint;
+    final formData = FormData.fromMap({
+      'file': await MultipartFile.fromFile(photo.path, filename: fileName),
+    });
+
+    final url = '$endpoint/api/images/upload/$id';
+    try {
+      final response = await dio.post(
+        url,
+        data: formData,
+        options: Options(
+          headers: <String, String>{
+            'Content-Type': 'multipart/form-data',
+          },
+        ),
+      );
+      print(response.data);
     } on DioError {
       rethrow;
     }

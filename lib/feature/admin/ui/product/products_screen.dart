@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../constants/constants.dart';
-import '../../../constants/size_config.dart';
-import '../../cart/ui/widgets/cart_card.dart';
-import '../../product/ui/product_details.dart';
-import '../bloc/admin_bloc.dart';
+import '../../../../constants/constants.dart';
+import '../../../../constants/size_config.dart';
+import '../../../cart/ui/widgets/cart_card.dart';
+import '../../../product/ui/product_details.dart';
+import '../../bloc/admin_bloc.dart';
+import 'add_product_screen.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({Key? key}) : super(key: key);
@@ -21,7 +22,15 @@ class _ProductsScreenState extends State<ProductsScreen> {
     BlocProvider.of<AdminBloc>(context).add(FetchProducts());
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showDialog(
+            context: context,
+            useSafeArea: true,
+            builder: ((context) {
+              return AddProductScreen();
+            }),
+          );
+        },
         backgroundColor: kPrimaryColor,
         child: const Icon(
           Icons.add,
@@ -34,7 +43,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
             if (state is AdminLoadedState) {
               return Column(
                 children: [
-                  SizedBox(height: getProportionateScreenHeight(20)),
+                  SizedBox(
+                    height: getProportionateScreenHeight(20),
+                  ),
                   Container(
                     decoration: BoxDecoration(
                       color: kSecondaryColor.withOpacity(0.1),
@@ -54,7 +65,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
                         focusedBorder: InputBorder.none,
                         enabledBorder: InputBorder.none,
                         hintText: 'Search product',
-                        prefixIcon: const Icon(Icons.search),
+                        prefixIcon: const Icon(
+                          Icons.search,
+                        ),
                       ),
                     ),
                   ),

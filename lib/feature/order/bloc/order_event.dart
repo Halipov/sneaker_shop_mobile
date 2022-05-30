@@ -7,4 +7,9 @@ abstract class OrderEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class PayEvent extends OrderEvent {}
+class PayEvent extends OrderEvent {
+  final Order order;
+  PayEvent({
+    required this.order,
+  });
+}

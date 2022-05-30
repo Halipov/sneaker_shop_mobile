@@ -68,6 +68,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       },
     );
     on<LogOutEvent>((event, emit) {
+      HardCodeConstants().isAdmin = false;
       emit(AuthNotAuthenticated());
     });
   }

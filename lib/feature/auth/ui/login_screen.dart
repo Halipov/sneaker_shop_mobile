@@ -16,38 +16,31 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final userLoginController = TextEditingController(text: 'Test@test4');
     final passwordController = TextEditingController(text: 'testing');
-    return BlocListener<AuthBloc, AuthState>(
-      listener: (context, state) {
-        if (state is AuthAuthenticated) {
-          Navigator.pop(context);
-        }
-      },
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              const LogoImage(),
-              LoginTextField(
-                userLoginController: userLoginController,
-                passwordController: passwordController,
-              ),
-              const ForgotPassword(),
-              LoginButonColor(
-                onPressed: () {
-                  BlocProvider.of<AuthBloc>(context).add(
-                    LogInEvent(
-                      user: User(
-                        userName: userLoginController.text,
-                        password: passwordController.text,
-                      ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const LogoImage(),
+            LoginTextField(
+              userLoginController: userLoginController,
+              passwordController: passwordController,
+            ),
+            const ForgotPassword(),
+            LoginButonColor(
+              onPressed: () {
+                BlocProvider.of<AuthBloc>(context).add(
+                  LogInEvent(
+                    user: User(
+                      userName: userLoginController.text,
+                      password: passwordController.text,
                     ),
-                  );
-                },
-              ),
-              TextSignUp()
-            ],
-          ),
+                  ),
+                );
+              },
+            ),
+            TextSignUp()
+          ],
         ),
       ),
     );

@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import '../../../constants/url_config.dart';
 import '../model/new_user.dart';
 import '../model/user.dart';
+import '../model/user_info.dart';
 import '../model/user_profile.dart';
 
 class AuthService {
@@ -46,6 +47,26 @@ class AuthService {
     print(user.toJson());
     try {
       final response = await dio.post(
+        url,
+        data: user.toJson(),
+        options: Options(
+          headers: <String, String>{
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+      print(response.data);
+    } on DioError {
+      rethrow;
+    }
+  }
+
+  Future<void> updateUser(UserInfo user) async {
+    final endpoint = UrlConfig.endpoint;
+    final url = '$endpoint/api/userInfo/${user.id}';
+    print(user.toJson());
+    try {
+      final response = await dio.put(
         url,
         data: user.toJson(),
         options: Options(

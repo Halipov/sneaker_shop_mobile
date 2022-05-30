@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../constants/constants.dart';
 import '../constants/size_config.dart';
 
 class PageName extends StatelessWidget {
@@ -10,28 +11,24 @@ class PageName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.fromLTRB(
-          SizeConfig.screenWidth / 27.4,
-
-          /// 15.0
-          SizeConfig.screenHeight / 341.5,
-
-          /// 2.0
-          SizeConfig.screenWidth / 20.55,
-
-          /// 20.0
-          SizeConfig.screenHeight / 68.3
-
-          /// 10.0
-          ),
-      child: Text(
-        textName,
-        style: TextStyle(
-            fontSize: SizeConfig.screenHeight / 40.18,
-            fontWeight: FontWeight.w500,
-            color: Colors.black54),
+        SizeConfig.screenWidth / 27.4,
+        SizeConfig.screenHeight / 341.5,
+        SizeConfig.screenWidth / 20.55,
+        SizeConfig.screenHeight / 200.3,
       ),
-
-      /// 17.0
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            textName,
+            style: TextStyle(
+              fontSize: SizeConfig.screenHeight / 40.18,
+              fontWeight: FontWeight.w500,
+              color: kPrimaryColor,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

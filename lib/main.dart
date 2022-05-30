@@ -17,6 +17,9 @@ import 'feature/cart/bloc/cart_bloc.dart';
 import 'feature/catalog/bloc/catalog_bloc.dart';
 import 'feature/catalog/service/product_service.dart';
 import 'feature/favorite/bloc/favorite_bloc.dart';
+import 'feature/orders/bloc/orders_bloc.dart';
+import 'feature/orders/service/orders_service.dart';
+import 'feature/profile/bloc/profile_bloc.dart';
 import 'routes.dart';
 
 void main() {
@@ -38,6 +41,9 @@ void main() {
             RepositoryProvider(
               create: (context) => ProductService(dio),
             ),
+            RepositoryProvider(
+              create: (context) => OrdersService(dio),
+            ),
           ],
           child: MultiBlocProvider(
             providers: [
@@ -47,15 +53,27 @@ void main() {
                   context.read<UserService>(),
                 ),
               ),
+              BlocProvider<ProfileBloc>(
+                create: (context) => ProfileBloc(
+                  context.read<AuthService>(),
+                ),
+              ),
               BlocProvider<MainAppBloc>(
                 create: (context) => MainAppBloc(),
               ),
               BlocProvider<AdminBloc>(
-                create: (context) => AdminBloc(),
+                create: (context) => AdminBloc(
+                  context.read<ProductService>(),
+                ),
               ),
               BlocProvider<CatalogBloc>(
                 create: (context) => CatalogBloc(
                   context.read<ProductService>(),
+                ),
+              ),
+              BlocProvider<OrdersBloc>(
+                create: (context) => OrdersBloc(
+                  context.read<OrdersService>(),
                 ),
               ),
               BlocProvider<CartBloc>(

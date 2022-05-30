@@ -6,10 +6,12 @@ import '../../../constants/size_config.dart';
 
 class CustomTextField extends StatelessWidget {
   final String enterText;
+  final TextEditingController controller;
   final double sizeWidth;
   CustomTextField({
     Key? key,
     required this.enterText,
+    required this.controller,
     required this.sizeWidth,
   }) : super(key: key);
 
@@ -18,19 +20,12 @@ class CustomTextField extends StatelessWidget {
     SizeConfig().init(context);
     return Padding(
       padding: EdgeInsets.fromLTRB(
-          SizeConfig.screenWidth / 41.1,
-
-          /// 10.0
-          0,
-          SizeConfig.screenWidth / 82.2,
-
-          /// 5.0
-          SizeConfig.screenHeight / 85.37
-
-          /// 8.0
-          ),
+        SizeConfig.screenWidth / 43.1,
+        0,
+        SizeConfig.screenWidth / 43.2,
+        SizeConfig.screenHeight / 85.37,
+      ),
       child: Container(
-        width: SizeConfig.screenWidth / sizeWidth,
         decoration: BoxDecoration(
           color: Colors.grey.shade100,
           borderRadius: const BorderRadius.all(
@@ -42,6 +37,7 @@ class CustomTextField extends StatelessWidget {
             color: Color(0xFFf2ac29),
           ),
           cursorColor: const Color(0xFFf2ac29),
+          controller: controller,
           decoration: InputDecoration(
             enabledBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0)),

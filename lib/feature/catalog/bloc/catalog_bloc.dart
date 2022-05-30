@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../constants/products_consants.dart';
 import '../model/product.dart';
 import '../service/product_service.dart';
 

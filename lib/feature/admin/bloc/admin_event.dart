@@ -15,6 +15,14 @@ class DeleteProduct extends AdminEvent {
   DeleteProduct(this.product);
 }
 
+class AddProduct extends AdminEvent {
+  final Product product;
+  final List<XFile> photos;
+  final String sizes;
+
+  AddProduct(this.product, this.photos, this.sizes);
+}
+
 class SearchEvent extends AdminEvent {
   final String text;
 

@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class Product {
@@ -51,7 +49,6 @@ class Product {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
       'article': article,
       'name': name,
       'description': description,

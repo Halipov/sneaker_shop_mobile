@@ -22,7 +22,7 @@ class Order {
       'id': id,
       'userInfo': userInfo.toOrderMap(),
       'products': products.map((x) => x.toOrderMap()).toList(),
-      'amount': amount,
+      'amount': amount * 100,
       'status': status,
     };
   }

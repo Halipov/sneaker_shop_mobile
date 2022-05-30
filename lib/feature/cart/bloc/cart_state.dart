@@ -13,7 +13,7 @@ class CartLoadingState extends CartState {}
 
 class CartLoadedState extends CartState {
   final List<Product> products;
-  final double sum;
+  final int sum;
 
   CartLoadedState({
     required this.products,

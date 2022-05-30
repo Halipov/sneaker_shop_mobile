@@ -5,10 +5,9 @@ import 'package:flutter_svg/svg.dart';
 import '../../../constants/constants.dart';
 import '../../../enums/app_mode.dart';
 import '../../app/bloc/main_app_bloc.dart';
-import '../../catalog/ui/profile/profile_screen.dart';
-import 'logout_screen.dart';
-import 'order_screen.dart';
-import 'products_screen.dart';
+import '../../orders/ui/order_screen.dart';
+import '../../profile/ui/profile_screen.dart';
+import 'product/products_screen.dart';
 
 class AdminScreen extends StatelessWidget {
   const AdminScreen({Key? key}) : super(key: key);

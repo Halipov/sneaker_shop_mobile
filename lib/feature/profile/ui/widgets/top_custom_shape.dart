@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../constants/constants.dart';
 import '../../../../../constants/size_config.dart';
-import '../../../../auth/service/user_service.dart';
+import '../../../auth/service/user_service.dart';
 import 'custom_shape.dart';
 
 class TopCustomShape extends StatelessWidget {
@@ -29,14 +29,16 @@ class TopCustomShape extends StatelessWidget {
                   height: SizeConfig.screenHeight / 4.88,
                   width: SizeConfig.screenWidth / 2.93,
                   decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                          color: Colors.white,
-                          width: SizeConfig.screenWidth / 51.37),
+                    shape: BoxShape.circle,
+                    border: Border.all(
                       color: Colors.white,
-                      image: const DecorationImage(
-                          image:
-                              AssetImage('assets/images/Profile Image.png'))),
+                      width: SizeConfig.screenWidth / 51.37,
+                    ),
+                    color: Colors.white,
+                    image: const DecorationImage(
+                      image: AssetImage('assets/images/Profile Image.png'),
+                    ),
+                  ),
                 ),
                 Text(
                   '${userInfo.lastName} ${userInfo.firstName}',
