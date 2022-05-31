@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../constants/constants.dart';
 import '../../../../../constants/size_config.dart';
+import '../../../../constants/products_consants.dart';
 import '../../../auth/service/user_service.dart';
 import 'custom_shape.dart';
 
@@ -41,7 +42,9 @@ class TopCustomShape extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '${userInfo.lastName} ${userInfo.firstName}',
+                  HardCodeConstants().isAdmin
+                      ? 'Admin'
+                      : '${userInfo.lastName} ${userInfo.firstName}',
                   style: const TextStyle(fontSize: 22),
                 ),
                 SizedBox(

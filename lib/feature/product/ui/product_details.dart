@@ -17,7 +17,9 @@ class ProductDetails extends StatelessWidget {
       create: (context) => ProductBloc(
         product,
         context.read<ProductService>(),
-      ),
+      )..add(
+          FetchSizes(article: product.article),
+        ),
       child: Scaffold(
         backgroundColor: const Color(0xFFF5F6F9),
         appBar: PreferredSize(

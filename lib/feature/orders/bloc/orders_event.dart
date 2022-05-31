@@ -8,3 +8,10 @@ abstract class OrdersEvent extends Equatable {
 }
 
 class FetchOrders extends OrdersEvent {}
+
+class UpdateStatus extends OrdersEvent {
+  final int id;
+  UpdateStatus({
+    required this.id,
+  });
+}

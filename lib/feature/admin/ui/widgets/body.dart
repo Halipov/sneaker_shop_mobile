@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../common/default_button.dart';
 import '../../../../constants/products_consants.dart';
@@ -37,7 +38,11 @@ class Body extends StatelessWidget {
                 color: const Color(0xFFF6F7F9),
                 child: Column(
                   children: [
-                    ColorDots(product: product),
+                    BlocBuilder<ProductBloc, ProductState>(
+                      builder: (context, state) {
+                        return SizesContainers(sizes: state.sizes);
+                      },
+                    ),
                     TopRoundedContainer(
                       color: Colors.white,
                       child: Padding(
@@ -50,7 +55,12 @@ class Body extends StatelessWidget {
                         child: DefaultButton(
                           text: 'Add To Cart',
                           press: () {
-                            bloc.add(AddToCartEvent(productId: product.id));
+                            bloc.add(
+                              AddToCartEvent(
+                                article: product.article,
+                                size: product.size.toDouble(),
+                              ),
+                            );
                           },
                         ),
                       ),

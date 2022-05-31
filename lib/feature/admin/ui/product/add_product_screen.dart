@@ -170,7 +170,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             name: widget.nameController.text,
                             description: widget.descriptionController.text,
                             price: int.parse(widget.priceController.text),
-                            size: 20,
+                            size: 41,
                           ),
                           _imageFileList!,
                           widget.sizeController.text,

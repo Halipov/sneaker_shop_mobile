@@ -2,8 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-
-import 'bloc_observable.dart';
 import 'constants/theme.dart';
 import 'feature/admin/bloc/admin_bloc.dart';
 import 'feature/admin/ui/admin_screen.dart';
@@ -20,6 +18,7 @@ import 'feature/favorite/bloc/favorite_bloc.dart';
 import 'feature/orders/bloc/orders_bloc.dart';
 import 'feature/orders/service/orders_service.dart';
 import 'feature/profile/bloc/profile_bloc.dart';
+import 'feature/profile/ui/bloc_observable.dart';
 import 'routes.dart';
 
 void main() {

@@ -1,4 +1,3 @@
-import '../model/user_info.dart';
 import '../model/user_profile.dart';
 
 class UserService {

@@ -1,23 +1,34 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 
 import '../../../constants/constants.dart';
-import '../bloc/orders_bloc.dart';
+import '../../auth/service/auth_service.dart';
+import '../../auth/service/user_service.dart';
+import '../../order/model/order_mode.dart';
+import '../../orders/service/orders_service.dart';
 
-class OrderScreen extends StatelessWidget {
-  const OrderScreen({Key? key}) : super(key: key);
+class PastOrdersScreen extends StatefulWidget {
+  const PastOrdersScreen({Key? key}) : super(key: key);
 
   @override
+  State<PastOrdersScreen> createState() => _PastOrdersScreenState();
+}
+
+class _PastOrdersScreenState extends State<PastOrdersScreen> {
+  final userInfo = UserService().user.userInfo;
+  @override
   Widget build(BuildContext context) {
-    BlocProvider.of<OrdersBloc>(context).add(FetchOrders());
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Orders'),
+        title: const Text('My Orders'),
       ),
-      body: BlocBuilder<OrdersBloc, OrdersState>(
-        builder: (context, state) {
-          if (state is OrdersLoadedState) {
-            final list = state.list.reversed.toList();
+      body: FutureBuilder<List<Order>>(
+        future: OrdersService(Dio()).fetchOrdersByUsers(userInfo.id),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final list = snapshot.data!;
             return ListView.builder(
               shrinkWrap: true,
               itemCount: list.length,
@@ -34,18 +45,15 @@ class OrderScreen extends StatelessWidget {
                     ),
                     key: Key(item.userInfo.phone),
                     onDismissed: (direction) {
-                      BlocProvider.of<OrdersBloc>(context).add(
-                        UpdateStatus(id: item.id),
-                      );
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (context) {
-                          return const Text(
-                            'approved',
-                            textAlign: TextAlign.center,
-                          );
-                        },
-                      );
+                      // showModalBottomSheet(
+                      //   context: context,
+                      //   builder: (context) {
+                      //     return const Text(
+                      //       'approved',
+                      //       textAlign: TextAlign.center,
+                      //     );
+                      //   },
+                      // );
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(

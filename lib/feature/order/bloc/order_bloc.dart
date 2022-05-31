@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../auth/service/user_service.dart';
-import '../../catalog/model/product.dart';
 import '../model/order_mode.dart';
 import '../service/order_service.dart';
 
@@ -16,6 +14,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       await service.initPaymentSheet(
         event.order,
       );
+      emit(OrderConfirmState());
     });
   }
 }

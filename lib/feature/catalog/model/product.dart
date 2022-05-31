@@ -9,12 +9,6 @@ class Product {
   final String name;
   final String description;
   final List<Uint8List> photos;
-  final List<Color> colors = [
-    const Color(0xFFF6625E),
-    const Color(0xFF836DB8),
-    const Color(0xFFDECB9C),
-    Colors.white,
-  ];
   final int price;
   final int size;
   Product({

@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/default_button.dart';
 import '../../../common/page_name.dart';
-import '../../../common/ui/widgets/custom_textfield.dart';
 import '../../../constants/size_config.dart';
-import '../../auth/model/user_info.dart';
 import '../../auth/service/user_service.dart';
 import '../../catalog/model/product.dart';
 import '../bloc/order_bloc.dart';
@@ -28,76 +26,79 @@ class OrderScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Order'),
         ),
-        body: Stack(
-          children: [
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: CheckoutCard(
-                productList: productList,
-                totalAmount: totalAmount,
+        body: BlocListener<OrderBloc, OrderState>(
+          listener: (context, state) {},
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: CheckoutCard(
+                  productList: productList,
+                  totalAmount: totalAmount,
+                ),
               ),
-            ),
-            BlocBuilder<OrderBloc, OrderState>(
-              builder: (context, state) {
-                // return Center(
-                //     child: TextButton(
-                //   child: const Text('Pay'),
-                //   onPressed: () {
-                //     BlocProvider.of<OrderBloc>(context).add(PayEvent());
-                //   },
-                // ));
-                final userInfo = UserService().user.userInfo;
-                final user = UserService().user;
-                return SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      PageName(textName: 'Full Name'),
-                      TitleWidget(
-                        text: '${userInfo.lastName} ${userInfo.firstName}',
-                      ),
-                      PageName(textName: 'Email'),
-                      TitleWidget(
-                        text: user.username,
-                      ),
-                      PageName(textName: 'Phone'),
-                      TitleWidget(
-                        text: userInfo.phone,
-                      ),
-                      PageName(textName: 'Address'),
-                      TitleWidget(
-                        text: userInfo.address,
-                      ),
-                      PageName(textName: 'Total amount'),
-                      TitleWidget(
-                        text: '${totalAmount.toString()}\$',
-                      ),
-                      // Row(
-                      //   children: [
-                      //     Column(
-                      //       crossAxisAlignment: CrossAxisAlignment.start,
-                      //       children: [
-                      //         PageName(textName: 'City'),
-                      //         CustomTextField(
-                      //             enterText: 'Enter here', sizeWidth: 3.0)
-                      //       ],
-                      //     ),
-                      //     Column(
-                      //       crossAxisAlignment: CrossAxisAlignment.start,
-                      //       children: [
-                      //         PageName(textName: 'Country'),
-                      //         CustomTextField(
-                      //             enterText: 'Your country', sizeWidth: 3.0)
-                      //       ],
-                      //     )
-                      //   ],
-                      // ),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ],
+              BlocBuilder<OrderBloc, OrderState>(
+                builder: (context, state) {
+                  // return Center(
+                  //     child: TextButton(
+                  //   child: const Text('Pay'),
+                  //   onPressed: () {
+                  //     BlocProvider.of<OrderBloc>(context).add(PayEvent());
+                  //   },
+                  // ));
+                  final userInfo = UserService().user.userInfo;
+                  final user = UserService().user;
+                  return SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        PageName(textName: 'Full Name'),
+                        TitleWidget(
+                          text: '${userInfo.lastName} ${userInfo.firstName}',
+                        ),
+                        PageName(textName: 'Email'),
+                        TitleWidget(
+                          text: user.username,
+                        ),
+                        PageName(textName: 'Phone'),
+                        TitleWidget(
+                          text: userInfo.phone,
+                        ),
+                        PageName(textName: 'Address'),
+                        TitleWidget(
+                          text: userInfo.address,
+                        ),
+                        PageName(textName: 'Total amount'),
+                        TitleWidget(
+                          text: '${totalAmount.toString()}\$',
+                        ),
+                        // Row(
+                        //   children: [
+                        //     Column(
+                        //       crossAxisAlignment: CrossAxisAlignment.start,
+                        //       children: [
+                        //         PageName(textName: 'City'),
+                        //         CustomTextField(
+                        //             enterText: 'Enter here', sizeWidth: 3.0)
+                        //       ],
+                        //     ),
+                        //     Column(
+                        //       crossAxisAlignment: CrossAxisAlignment.start,
+                        //       children: [
+                        //         PageName(textName: 'Country'),
+                        //         CustomTextField(
+                        //             enterText: 'Your country', sizeWidth: 3.0)
+                        //       ],
+                        //     )
+                        //   ],
+                        // ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -121,9 +122,14 @@ class TitleWidget extends StatelessWidget {
         SizeConfig.screenWidth / 20.55,
         SizeConfig.screenHeight / 68.3,
       ),
-      child: Text(
-        text,
-        style: const TextStyle(fontSize: 22),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            text,
+            style: const TextStyle(fontSize: 22),
+          ),
+        ],
       ),
     );
   }

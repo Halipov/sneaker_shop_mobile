@@ -57,7 +57,9 @@ class ProductService {
     }
   }
 
-  Future<int> addProduct(Product product) async {
+  Future<int> addProduct(
+    Product product,
+  ) async {
     final endpoint = UrlConfig.endpoint;
     final url = '$endpoint/api/product';
     try {
@@ -78,7 +80,7 @@ class ProductService {
   }
 
   Future<void> addPhoto(File photo, int id) async {
-    final fileName = photo.path.split('/').last;
+    final fileName = photo.path.split('image_picker').last;
     final endpoint = UrlConfig.endpoint;
     final formData = FormData.fromMap({
       'file': await MultipartFile.fromFile(photo.path, filename: fileName),
@@ -183,7 +185,8 @@ class ProductService {
 
   Future<void> addCart(
     int cartId,
-    int productId,
+    String article,
+    double size,
   ) async {
     // await Future.delayed(
     //   const Duration(milliseconds: 1000),
@@ -194,7 +197,10 @@ class ProductService {
     try {
       final response = await dio.put(
         url,
-        data: {'id': productId},
+        data: {
+          'article': article,
+          'size': size,
+        },
         options: Options(
           headers: <String, String>{
             'Content-Type': 'application/json',
@@ -228,6 +234,35 @@ class ProductService {
         ),
       );
       print(response.data);
+    } on DioError {
+      rethrow;
+    }
+  }
+
+  Future<List<int>> fetchSizes(
+    String article,
+  ) async {
+    // await Future.delayed(
+    //   const Duration(milliseconds: 1000),
+    // );
+    // return HardCodeConstants().productList;
+    final endpoint = UrlConfig.endpoint;
+    final url = '$endpoint/api/sizes/$article';
+    try {
+      final response = await dio.get(
+        url,
+        options: Options(
+          headers: <String, String>{
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+      print(response.data);
+      return List<int>.from(
+        response.data.map(
+          (x) => x.round(),
+        ),
+      );
     } on DioError {
       rethrow;
     }

@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../auth/service/user_service.dart';
 import '../../order/model/order_mode.dart';
 import '../service/orders_service.dart';
 
@@ -15,6 +16,18 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
     on<FetchOrders>((event, emit) async {
       try {
         emit(OrdersLoadingState());
+        final orderList = await _service.fetchOrders();
+        emit(OrdersLoadedState(list: orderList));
+      } on Exception catch (e) {
+        emit(
+          OrdersErrorState(message: e.toString()),
+        );
+      }
+    });
+    on<UpdateStatus>((event, emit) async {
+      try {
+        emit(OrdersLoadingState());
+        await _service.updateOrder(event.id);
         final orderList = await _service.fetchOrders();
         emit(OrdersLoadedState(list: orderList));
       } on Exception catch (e) {

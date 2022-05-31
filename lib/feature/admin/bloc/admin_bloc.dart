@@ -54,13 +54,24 @@ class AdminBloc extends Bloc<AdminEvent, AdminState> {
     on<AddProduct>((event, emit) async {
       try {
         emit(AdminLoadingState());
-
-        final id = await _productService.addProduct(event.product);
-
-        for (final element in event.photos) {
-          final file = File(element.path);
-          await _productService.addPhoto(file, id);
+        for (final element in event.sizes.split(',')) {
+          print(element);
+          final id = await _productService.addProduct(
+            event.product.copyWith(
+              size: int.parse(element),
+            ),
+          );
+          for (final element in event.photos) {
+            final file = File(element.path);
+            await Future.delayed(
+              const Duration(
+                seconds: 2,
+              ),
+            );
+            await _productService.addPhoto(file, id);
+          }
         }
+
         final productList = await _productService.fetchProducts();
         emit(
           AdminLoadedState(

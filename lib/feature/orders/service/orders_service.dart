@@ -34,4 +34,53 @@ class OrdersService {
       rethrow;
     }
   }
+
+  Future<void> updateOrder(int id) async {
+    // await Future.delayed(
+    //   const Duration(milliseconds: 1000),
+    // );
+    // return HardCodeConstants().productList;
+    final endpoint = UrlConfig.endpoint;
+    final url = '$endpoint/api/order/$id';
+    try {
+      final response = await dio.put(
+        url,
+        options: Options(
+          headers: <String, String>{
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+      print(response.data);
+    } on DioError {
+      rethrow;
+    }
+  }
+
+  Future<List<Order>> fetchOrdersByUsers(int id) async {
+    // await Future.delayed(
+    //   const Duration(milliseconds: 1000),
+    // );
+    // return HardCodeConstants().productList;
+    final endpoint = UrlConfig.endpoint;
+    final url = '$endpoint/api/orders/$id';
+    try {
+      final response = await dio.get(
+        url,
+        options: Options(
+          headers: <String, String>{
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+      print(response.data);
+      return List<Order>.from(
+        response.data.map(
+          (x) => Order.fromMap(x),
+        ),
+      );
+    } on DioError {
+      rethrow;
+    }
+  }
 }
