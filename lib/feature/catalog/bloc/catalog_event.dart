@@ -17,3 +17,12 @@ class SearchEvent extends CatalogEvent {
     this.text,
   );
 }
+
+class OnSortEvent extends CatalogEvent {
+  final String byOrder;
+  final List<Product> products;
+  OnSortEvent({
+    required this.byOrder,
+    required this.products,
+  });
+}

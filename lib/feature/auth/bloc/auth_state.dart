@@ -11,6 +11,8 @@ class AuthInitial extends AuthState {}
 
 class AuthLoadingState extends AuthState {}
 
+class GuestAuthLoadingState extends AuthState {}
+
 class AuthNotAuthenticated extends AuthState {}
 
 class AuthAuthenticated extends AuthState {}

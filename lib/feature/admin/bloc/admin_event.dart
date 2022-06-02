@@ -23,6 +23,13 @@ class AddProduct extends AdminEvent {
   AddProduct(this.product, this.photos, this.sizes);
 }
 
+class UpdateProduct extends AdminEvent {
+  final Product product;
+  final String sizes;
+
+  UpdateProduct(this.product, this.sizes);
+}
+
 class SearchEvent extends AdminEvent {
   final String text;
 

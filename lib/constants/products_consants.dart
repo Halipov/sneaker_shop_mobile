@@ -9,6 +9,7 @@ class HardCodeConstants {
 
   factory HardCodeConstants() => _instance ??= HardCodeConstants._();
   bool admin = false;
+  bool guest = false;
   List<Product> list = [
     Product(
       id: 1,
@@ -65,6 +66,10 @@ class HardCodeConstants {
   bool get isAdmin => admin;
 
   set isAdmin(bool value) => admin = value;
+
+  bool get isGuest => guest;
+
+  set isGuest(bool value) => guest = value;
 
   List<Product> get productList => list;
 

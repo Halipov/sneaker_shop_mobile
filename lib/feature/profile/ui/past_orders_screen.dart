@@ -1,10 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../../../constants/constants.dart';
-import '../../auth/service/auth_service.dart';
 import '../../auth/service/user_service.dart';
 import '../../order/model/order_mode.dart';
 import '../../orders/service/orders_service.dart';
@@ -28,7 +25,7 @@ class _PastOrdersScreenState extends State<PastOrdersScreen> {
         future: OrdersService(Dio()).fetchOrdersByUsers(userInfo.id),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            final list = snapshot.data!;
+            final list = snapshot.data!.reversed.toList();
             return ListView.builder(
               shrinkWrap: true,
               itemCount: list.length,

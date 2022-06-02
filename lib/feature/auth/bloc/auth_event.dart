@@ -22,6 +22,10 @@ class LogInEvent extends AuthEvent {
   });
 }
 
+class LogInViaGuestEvent extends AuthEvent {
+  const LogInViaGuestEvent();
+}
+
 class SignUpEvent extends AuthEvent {
   final NewUser user;
 

@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import '../../../constants/products_consants.dart';
 import '../model/new_user.dart';
 import '../model/user.dart';
+import '../model/user_info.dart';
 import '../model/user_profile.dart';
 import '../service/auth_service.dart';
 import '../service/user_service.dart';
@@ -41,6 +42,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         }
       },
     );
+    on<LogInViaGuestEvent>((event, emit) async {
+      emit(GuestAuthLoadingState());
+      HardCodeConstants().isGuest = true;
+      _userService.user = UserProfile.guest();
+      emit(AuthAuthenticated());
+    });
     on<SignUpEvent>(
       (event, emit) async {
         emit(AuthLoadingState());
@@ -69,6 +76,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
     on<LogOutEvent>((event, emit) {
       HardCodeConstants().isAdmin = false;
+      HardCodeConstants().isGuest = false;
       emit(AuthNotAuthenticated());
     });
   }

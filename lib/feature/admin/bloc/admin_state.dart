@@ -19,6 +19,8 @@ class AdminLoadedState extends AdminState {
   });
 }
 
+class AdminAddedState extends AdminState {}
+
 class AdminErrorState extends AdminState {
   final String message;
 

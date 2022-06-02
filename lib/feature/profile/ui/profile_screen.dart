@@ -28,28 +28,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
             SizedBox(
               height: SizeConfig.screenHeight / 34.15,
             ),
-            HardCodeConstants().isAdmin
-                ? Container()
-                : UserSection(
-                    iconName: Icons.account_circle,
-                    sectionText: 'My information',
-                    onTap: () => showDialog(
-                      useSafeArea: false,
-                      context: context,
-                      builder: (_) => const UserProfileScreen(),
-                    ).whenComplete(() => setState(() {})),
-                  ),
-            HardCodeConstants().isAdmin
-                ? Container()
-                : UserSection(
-                    iconName: Icons.shopping_basket,
-                    sectionText: 'Past orders',
-                    onTap: () => showDialog(
-                      useSafeArea: false,
-                      context: context,
-                      builder: (_) => const PastOrdersScreen(),
-                    ),
-                  ),
+            !HardCodeConstants().isGuest
+                ? Column(
+                    children: [
+                      HardCodeConstants().isAdmin
+                          ? Container()
+                          : UserSection(
+                              iconName: Icons.account_circle,
+                              sectionText: 'My information',
+                              onTap: () => showDialog(
+                                useSafeArea: false,
+                                context: context,
+                                builder: (_) => const UserProfileScreen(),
+                              ).whenComplete(() => setState(() {})),
+                            ),
+                      HardCodeConstants().isAdmin
+                          ? Container()
+                          : UserSection(
+                              iconName: Icons.shopping_basket,
+                              sectionText: 'Past orders',
+                              onTap: () => showDialog(
+                                useSafeArea: false,
+                                context: context,
+                                builder: (_) => const PastOrdersScreen(),
+                              ),
+                            ),
+                    ],
+                  )
+                : Container(),
             UserSection(
               iconName: Icons.logout,
               sectionText: 'Log Out',

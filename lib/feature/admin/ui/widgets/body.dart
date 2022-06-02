@@ -34,40 +34,50 @@ class Body extends StatelessWidget {
                 product: product,
                 pressOnSeeMore: () {},
               ),
-              TopRoundedContainer(
-                color: const Color(0xFFF6F7F9),
-                child: Column(
-                  children: [
-                    BlocBuilder<ProductBloc, ProductState>(
-                      builder: (context, state) {
-                        return SizesContainers(sizes: state.sizes);
-                      },
-                    ),
-                    TopRoundedContainer(
-                      color: Colors.white,
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          left: SizeConfig.screenWidth * 0.15,
-                          right: SizeConfig.screenWidth * 0.15,
-                          bottom: getProportionateScreenWidth(40),
-                          top: getProportionateScreenWidth(15),
-                        ),
-                        child: DefaultButton(
-                          text: 'Add To Cart',
-                          press: () {
-                            bloc.add(
-                              AddToCartEvent(
-                                article: product.article,
-                                size: product.size.toDouble(),
-                              ),
-                            );
-                          },
-                        ),
+              HardCodeConstants().isGuest
+                  ? Container()
+                  : TopRoundedContainer(
+                      color: const Color(0xFFF6F7F9),
+                      child: Column(
+                        children: [
+                          BlocBuilder<ProductBloc, ProductState>(
+                            builder: (context, state) {
+                              if (state.sizes.isNotEmpty) {
+                                return SizesContainers(sizes: state.sizes);
+                              } else {
+                                return const CircularProgressIndicator(
+                                  strokeWidth: 0.5,
+                                );
+                              }
+                            },
+                          ),
+                          HardCodeConstants().isGuest
+                              ? Container()
+                              : TopRoundedContainer(
+                                  color: Colors.white,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                      left: SizeConfig.screenWidth * 0.15,
+                                      right: SizeConfig.screenWidth * 0.15,
+                                      bottom: getProportionateScreenWidth(40),
+                                      top: getProportionateScreenWidth(15),
+                                    ),
+                                    child: DefaultButton(
+                                      text: 'Add To Cart',
+                                      press: () {
+                                        bloc.add(
+                                          AddToCartEvent(
+                                            article: product.article,
+                                            size: product.size.toDouble(),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
             ],
           ),
         ),

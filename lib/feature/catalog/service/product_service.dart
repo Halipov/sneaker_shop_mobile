@@ -79,7 +79,29 @@ class ProductService {
     }
   }
 
-  Future<void> addPhoto(File photo, int id) async {
+  Future<int> updateProduct(
+    Product product,
+  ) async {
+    final endpoint = UrlConfig.endpoint;
+    final url = '$endpoint/api/product/${product.id}';
+    try {
+      final response = await dio.put(
+        url,
+        data: product.toUpdateJson(),
+        options: Options(
+          headers: <String, String>{
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+      print(response.data['id']);
+      return response.data['id'];
+    } on DioError {
+      rethrow;
+    }
+  }
+
+  Future<void> addPhoto(File photo, int id, bool isFirst) async {
     final fileName = photo.path.split('image_picker').last;
     final endpoint = UrlConfig.endpoint;
     final formData = FormData.fromMap({
@@ -97,6 +119,15 @@ class ProductService {
           },
         ),
       );
+
+      print('Timer1');
+      await Future.delayed(
+        const Duration(
+          seconds: 6,
+        ),
+      );
+      print('TImer2');
+
       print(response.data);
     } on DioError {
       rethrow;

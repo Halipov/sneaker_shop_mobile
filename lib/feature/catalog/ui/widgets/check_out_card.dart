@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../common/default_button.dart';
 import '../../../../constants/size_config.dart';
+import '../../../cart/bloc/cart_bloc.dart';
 import '../../../order/ui/order_screen.dart';
+import '../../bloc/catalog_bloc.dart';
 import '../../model/product.dart';
 
 class CheckoutCard extends StatelessWidget {
@@ -67,6 +70,10 @@ class CheckoutCard extends StatelessWidget {
                         builder: (_) => OrderScreen(
                           productList: productList,
                           totalAmount: totalAmount,
+                        ),
+                      ).whenComplete(
+                        () => BlocProvider.of<CartBloc>(context).add(
+                          FetchCart(),
                         ),
                       );
                     },

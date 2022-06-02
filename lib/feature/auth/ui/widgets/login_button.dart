@@ -7,10 +7,12 @@ import '../../bloc/auth_bloc.dart';
 
 class LoginButonColor extends StatelessWidget {
   final void Function() onPressed;
+  final String text;
 
   LoginButonColor({
     Key? key,
     required this.onPressed,
+    required this.text,
   }) : super(key: key);
 
   @override
@@ -21,9 +23,9 @@ class LoginButonColor extends StatelessWidget {
         return Padding(
           padding: EdgeInsets.fromLTRB(
             SizeConfig.screenWidth / 20.55,
-            SizeConfig.screenHeight / 7.59,
+            SizeConfig.screenHeight / 40.59,
             SizeConfig.screenWidth / 20.55,
-            SizeConfig.screenHeight / 45.54,
+            SizeConfig.screenHeight / 90.54,
           ),
           child: Container(
             decoration: BoxDecoration(
@@ -40,12 +42,12 @@ class LoginButonColor extends StatelessWidget {
                 stops: [0.0, 1.0],
                 colors: state is AuthLoadingState
                     ? [
-                        kPrimaryColor.withOpacity(0.7),
-                        kSecondaryColor.withOpacity(0.7)
+                        Colors.orange,
+                        Colors.orangeAccent,
                       ]
                     : [
-                        kPrimaryColor,
-                        kSecondaryColor.withOpacity(0.5),
+                        Colors.orange,
+                        Colors.orangeAccent,
                       ],
               ),
               borderRadius: BorderRadius.circular(30),
@@ -67,23 +69,14 @@ class LoginButonColor extends StatelessWidget {
                 shadowColor: MaterialStateProperty.all(Colors.transparent),
               ),
               onPressed: onPressed,
-              child: state is AuthLoadingState
-                  ? Text(
-                      'Signing in',
-                      style: TextStyle(
-                        fontSize: SizeConfig.screenHeight / 42.68,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                      ),
-                    )
-                  : Text(
-                      'SignIn',
-                      style: TextStyle(
-                        fontSize: SizeConfig.screenHeight / 42.68,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                      ),
-                    ),
+              child: Text(
+                text,
+                style: TextStyle(
+                  fontSize: SizeConfig.screenHeight / 42.68,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
         );

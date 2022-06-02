@@ -51,6 +51,17 @@ class Product {
     };
   }
 
+  Map<String, dynamic> toUpdateMap() {
+    return {
+      'id': id,
+      'article': article,
+      'name': name,
+      'description': description,
+      'price': price,
+      'size': size,
+    };
+  }
+
   Map<String, dynamic> toOrderMap() {
     return {
       'id': id,
@@ -77,12 +88,14 @@ class Product {
 
   String toJson() => json.encode(toMap());
 
+  String toUpdateJson() => json.encode(toUpdateMap());
+
   factory Product.fromJson(String source) =>
       Product.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'Product(id: $id, article: $article, name: $name, description: $description, price: $price, size: $size)';
+    return '| $article, $name, $price\$, size: $size |';
   }
 
   @override

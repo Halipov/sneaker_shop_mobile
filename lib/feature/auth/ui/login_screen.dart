@@ -17,6 +17,7 @@ class LoginScreen extends StatelessWidget {
     final userLoginController = TextEditingController(text: 'Test@test4');
     // final userLoginController = TextEditingController(text: 'admin');
     final passwordController = TextEditingController(text: 'testing');
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -28,15 +29,34 @@ class LoginScreen extends StatelessWidget {
               passwordController: passwordController,
             ),
             const ForgotPassword(),
-            LoginButonColor(
-              onPressed: () {
-                BlocProvider.of<AuthBloc>(context).add(
-                  LogInEvent(
-                    user: User(
-                      userName: userLoginController.text,
-                      password: passwordController.text,
-                    ),
-                  ),
+            BlocBuilder<AuthBloc, AuthState>(
+              builder: (context, state) {
+                return LoginButonColor(
+                  text: state is AuthLoadingState ? 'Signing' : 'Sign in ',
+                  onPressed: () {
+                    BlocProvider.of<AuthBloc>(context).add(
+                      LogInEvent(
+                        user: User(
+                          userName: userLoginController.text,
+                          password: passwordController.text,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+            BlocBuilder<AuthBloc, AuthState>(
+              builder: (context, state) {
+                return LoginButonColor(
+                  text: state is GuestAuthLoadingState
+                      ? 'Signing'
+                      : 'Sign in via Guest',
+                  onPressed: () {
+                    BlocProvider.of<AuthBloc>(context).add(
+                      const LogInViaGuestEvent(),
+                    );
+                  },
                 );
               },
             ),

@@ -17,7 +17,7 @@ class PageName extends StatelessWidget {
         SizeConfig.screenHeight / 200.3,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             textName,

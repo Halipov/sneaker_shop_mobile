@@ -54,6 +54,7 @@ class AdminBloc extends Bloc<AdminEvent, AdminState> {
     on<AddProduct>((event, emit) async {
       try {
         emit(AdminLoadingState());
+        var isFirst = true;
         for (final element in event.sizes.split(',')) {
           print(element);
           final id = await _productService.addProduct(
@@ -63,25 +64,47 @@ class AdminBloc extends Bloc<AdminEvent, AdminState> {
           );
           for (final element in event.photos) {
             final file = File(element.path);
-            await Future.delayed(
-              const Duration(
-                seconds: 2,
-              ),
-            );
-            await _productService.addPhoto(file, id);
+            await _productService.addPhoto(file, id, isFirst);
+            isFirst = false;
           }
         }
 
+        emit(AdminAddedState());
         final productList = await _productService.fetchProducts();
         emit(
           AdminLoadedState(
             products: productList,
           ),
         );
+      } on Exception catch (e) {
+        emit(
+          AdminErrorState(message: e.toString()),
+        );
+      }
+    });
+    on<UpdateProduct>((event, emit) async {
+      try {
+        emit(AdminLoadingState());
+        // var isFirst = true;
+        for (final element in event.sizes.split(',')) {
+          print(element);
+          await _productService.updateProduct(
+            event.product.copyWith(
+              size: int.parse(element),
+            ),
+          );
+          // for (final element in event.photos) {
+          //   final file = File(element.path);
+          //   await _productService.addPhoto(file, event.product.id, isFirst);
+          //   isFirst = false;
+          // }
+        }
 
+        emit(AdminAddedState());
+        final productList = await _productService.fetchProducts();
         emit(
           AdminLoadedState(
-            products: HardCodeConstants().deleteProduct(event.product),
+            products: productList,
           ),
         );
       } on Exception catch (e) {

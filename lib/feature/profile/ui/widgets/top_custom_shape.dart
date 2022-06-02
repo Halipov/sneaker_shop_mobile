@@ -10,6 +10,14 @@ class TopCustomShape extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userInfo = UserService().user.userInfo;
+    String initText;
+    if (HardCodeConstants().isGuest) {
+      initText = 'Guest';
+    } else if (HardCodeConstants().isAdmin) {
+      initText = 'Admin';
+    } else {
+      initText = '${userInfo.lastName} ${userInfo.firstName}';
+    }
     return SizedBox(
       height: SizeConfig.screenHeight / 2.84,
       child: Stack(
@@ -18,7 +26,7 @@ class TopCustomShape extends StatelessWidget {
             clipper: CustomShape(),
             child: Container(
               height: SizeConfig.screenHeight / 4.56,
-              color: kPrimaryColor,
+              color: Colors.orange,
             ),
           ),
           Center(
@@ -42,9 +50,7 @@ class TopCustomShape extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  HardCodeConstants().isAdmin
-                      ? 'Admin'
-                      : '${userInfo.lastName} ${userInfo.firstName}',
+                  initText,
                   style: const TextStyle(fontSize: 22),
                 ),
                 SizedBox(

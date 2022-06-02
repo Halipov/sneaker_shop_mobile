@@ -27,12 +27,8 @@ class LogoImage extends StatelessWidget {
                 child: SizedBox(
                   width: SizeConfig.screenWidth / 2.74,
                   height: SizeConfig.screenHeight / 7.762,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/main/logo.png'),
-                      ),
-                    ),
+                  child: Image.asset(
+                    'assets/main/logo.png',
                   ),
                 ),
               ),
@@ -41,7 +37,7 @@ class LogoImage extends StatelessWidget {
                   padding: EdgeInsets.only(
                     top: SizeConfig.screenHeight / 68.3,
                   ),
-                  child: TextTitle(title: 'Welcome Back'),
+                  child: TextTitle(title: 'Welcome'),
                 ),
               )
             ],

@@ -27,7 +27,11 @@ class OrderScreen extends StatelessWidget {
           title: const Text('Order'),
         ),
         body: BlocListener<OrderBloc, OrderState>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is OrderConfirmState) {
+              Navigator.pop(context);
+            }
+          },
           child: Stack(
             children: [
               Align(
@@ -51,6 +55,7 @@ class OrderScreen extends StatelessWidget {
                   return SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         PageName(textName: 'Full Name'),
                         TitleWidget(
@@ -123,7 +128,7 @@ class TitleWidget extends StatelessWidget {
         SizeConfig.screenHeight / 68.3,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             text,
@@ -184,6 +189,10 @@ class CheckoutCard extends StatelessWidget {
                         userInfo: userInfo,
                         products: productList,
                         amount: totalAmount,
+                        description:
+                            '${userInfo.lastName} ${userInfo.firstName} $productList'
+                                .replaceAll(RegExp(r'\['), '')
+                                .replaceAll(RegExp(r'\]'), ''),
                         status: 'Paid',
                       ),
                     ),

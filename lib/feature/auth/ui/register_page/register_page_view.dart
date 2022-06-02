@@ -25,42 +25,49 @@ class _RegisterPageViewState extends State<RegisterPageView> {
     final lastNameController = TextEditingController();
     final addressController = TextEditingController();
     final phoneController = TextEditingController();
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const BackgroundImage(),
-            RegisterTextField(
-              usernameController: usernameController,
-              emailController: emailController,
-              passwordController: passwordController,
-              firstNameController: firstNameController,
-              lastNameController: lastNameController,
-              addressController: addressController,
-              phoneController: phoneController,
-            ),
-            RegisterButton(
-              onPressed: () {
-                BlocProvider.of<AuthBloc>(context).add(
-                  SignUpEvent(
-                    user: NewUser(
-                      userName: usernameController.text,
-                      password: passwordController.text,
-                      userInfo: UserInfo(
-                        id: 0,
-                        firstName: firstNameController.text,
-                        lastName: lastNameController.text,
-                        phone: phoneController.text,
-                        address: addressController.text,
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is AuthAuthenticated) {
+          Navigator.pop(context);
+        }
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const BackgroundImage(),
+              RegisterTextField(
+                usernameController: usernameController,
+                emailController: emailController,
+                passwordController: passwordController,
+                firstNameController: firstNameController,
+                lastNameController: lastNameController,
+                addressController: addressController,
+                phoneController: phoneController,
+              ),
+              RegisterButton(
+                onPressed: () {
+                  BlocProvider.of<AuthBloc>(context).add(
+                    SignUpEvent(
+                      user: NewUser(
+                        userName: usernameController.text,
+                        password: passwordController.text,
+                        userInfo: UserInfo(
+                          id: 0,
+                          firstName: firstNameController.text,
+                          lastName: lastNameController.text,
+                          phone: phoneController.text,
+                          address: addressController.text,
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
-            ),
-            TextSignIn()
-          ],
+                  );
+                },
+              ),
+              TextSignIn()
+            ],
+          ),
         ),
       ),
     );

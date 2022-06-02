@@ -29,7 +29,7 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
     on<UpdateFavorites>((event, emit) async {
       await _productService.updateFavorites(event.productId);
       final productList = await _productService.fetchFavorite();
-
+      emit(FavoriteLoadingState());
       // emit(FavoriteLoadingState());
       emit(
         FavoriteLoadedState(
