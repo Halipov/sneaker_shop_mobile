@@ -26,6 +26,7 @@ class _ProductDescriptionState extends State<ProductDescription> {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.max,
       children: [
         Padding(
           padding:
@@ -46,12 +47,21 @@ class _ProductDescriptionState extends State<ProductDescription> {
           child: Row(
             children: [
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    widget.product.description,
-                    style: const TextStyle(
-                      fontSize: 16,
+                child: Container(
+                  height: HardCodeConstants().isGuest
+                      ? 400
+                      : HardCodeConstants().isAdmin
+                          ? 500
+                          : 150,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SingleChildScrollView(
+                      child: Text(
+                        widget.product.description,
+                        style: const TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
                     ),
                   ),
                 ),

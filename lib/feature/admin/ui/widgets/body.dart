@@ -23,65 +23,70 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        ProductImages(product: product),
-        TopRoundedContainer(
-          color: Colors.white,
-          child: Column(
-            children: [
-              ProductDescription(
-                product: product,
-                pressOnSeeMore: () {},
-              ),
-              HardCodeConstants().isGuest
-                  ? Container()
-                  : TopRoundedContainer(
-                      color: const Color(0xFFF6F7F9),
-                      child: Column(
-                        children: [
-                          BlocBuilder<ProductBloc, ProductState>(
-                            builder: (context, state) {
-                              if (state.sizes.isNotEmpty) {
-                                return SizesContainers(sizes: state.sizes);
-                              } else {
-                                return const CircularProgressIndicator(
-                                  strokeWidth: 0.5,
-                                );
-                              }
-                            },
-                          ),
-                          HardCodeConstants().isGuest
-                              ? Container()
-                              : TopRoundedContainer(
-                                  color: Colors.white,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                      left: SizeConfig.screenWidth * 0.15,
-                                      right: SizeConfig.screenWidth * 0.15,
-                                      bottom: getProportionateScreenWidth(40),
-                                      top: getProportionateScreenWidth(15),
-                                    ),
-                                    child: DefaultButton(
-                                      text: 'Add To Cart',
-                                      press: () {
-                                        bloc.add(
-                                          AddToCartEvent(
-                                            article: product.article,
-                                            size: product.size.toDouble(),
-                                          ),
-                                        );
-                                      },
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          ProductImages(product: product),
+          TopRoundedContainer(
+            color: Colors.white,
+            child: Column(
+              children: [
+                ProductDescription(
+                  product: product,
+                  pressOnSeeMore: () {},
+                ),
+                HardCodeConstants().isGuest
+                    ? Container()
+                    : TopRoundedContainer(
+                        color: const Color(0xFFF6F7F9),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            BlocBuilder<ProductBloc, ProductState>(
+                              builder: (context, state) {
+                                if (state.sizes.isNotEmpty) {
+                                  return SizesContainers(sizes: state.sizes);
+                                } else {
+                                  return const CircularProgressIndicator(
+                                    strokeWidth: 0.5,
+                                  );
+                                }
+                              },
+                            ),
+                            HardCodeConstants().isGuest
+                                ? Container()
+                                : TopRoundedContainer(
+                                    color: Colors.white,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                        left: SizeConfig.screenWidth * 0.15,
+                                        right: SizeConfig.screenWidth * 0.15,
+                                        bottom: getProportionateScreenWidth(40),
+                                        top: getProportionateScreenWidth(15),
+                                      ),
+                                      child: DefaultButton(
+                                        text: 'Add To Cart',
+                                        press: () {
+                                          bloc.add(
+                                            AddToCartEvent(
+                                              article: product.article,
+                                              size: product.size.toDouble(),
+                                            ),
+                                          );
+                                        },
+                                      ),
                                     ),
                                   ),
-                                ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

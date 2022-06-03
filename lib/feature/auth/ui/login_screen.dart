@@ -14,7 +14,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userLoginController = TextEditingController(text: 'Test@test4');
+    final userLoginController =
+        TextEditingController(text: 'Halipov@gmail.com');
     // final userLoginController = TextEditingController(text: 'admin');
     final passwordController = TextEditingController(text: 'testing');
 
